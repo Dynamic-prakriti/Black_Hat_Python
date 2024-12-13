@@ -1,8 +1,8 @@
 
 import socket
 
-IP = '127.0.0.1'
-PORT = 9999
+IP = ' '
+PORT = [...]
 def main():
     server = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     server.bind((IP,PORT))
