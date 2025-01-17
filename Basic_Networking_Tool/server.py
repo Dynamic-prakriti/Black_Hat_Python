@@ -1,8 +1,8 @@
 
 import socket
 
-IP = ' '
-PORT = [...]
+IP = ' '  #place IP address here
+PORT = [...]  #replace port with the port number you want to listen on
 def main():
     server = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     server.bind((IP,PORT))

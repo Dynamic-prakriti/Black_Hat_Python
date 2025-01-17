@@ -15,14 +15,14 @@ def execute(cmd):
    
     return output.decode()
 
-class NetCat:
-    def __init__(self, args, buffer=None):
-        self.args = args
-        self.buffer = buffer
-        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+class NetCat:     # Creating the NetCat class
+    def __init__(self, args, buffer=None):  # Defining the __init__ method to initialize the attributes
+        self.args = args                    # Assigning the args to the self.args for the class
+        self.buffer = buffer                
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)   # Creating the socket object
+        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) # Setting the socket options
    
-    def run(self):
+    def run(self):                                                      # Defining the run method
         if self.args.listen:
             self.listen()
         else:
@@ -96,17 +96,18 @@ class NetCat:
                     sys.exit()
                     
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(
+    parser = argparse.ArgumentParser(                 # Creating the ArgumentParser object
         description='BHP Net Tool',
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog=textwrap.dedent('''Example:
+        formatter_class=argparse.RawDescriptionHelpFormatter,   # Formatting the text
+        # Example of the usage of the script
+        epilog=textwrap.dedent('''Example:                      
             netcat.py -t 192.168.1.108 -p 5555 -l -c # command shell
             netcat.py -t 192.168.1.108 -p 5555 -l -u=mytest.txt # upload to file
             netcat.py -t 192.168.1.108 -p 5555 -l -e =\"cat /etc/passwd\" # command shell
             echo 'ABC' | ./netcat.py -t 192.168.1.108 -p 135 # echo text to server port 135
             netcat.py -t 192.168.1.108 -p 5555 # connect to server
         '''))
-    parser.add_argument('-c', '--command', action='store_true', help='command shell')
+    parser.add_argument('-c', '--command', action='store_true', help='command shell')   # Adding the command shell argument
     parser.add_argument('-e', '--execute', help='execute specified command')
     parser.add_argument('-l', '--listen', action='store_true', help='listen')
     parser.add_argument('-p', '--port', type=int, default=5555, help='specified port')
@@ -122,3 +123,11 @@ if __name__ == '__main__':
     nc = NetCat(args, buffer.encode())
     nc.run()
    
+   
+   
+#Run
+# python3 ReplacingNetcat.py --help
+# python3 ReplacingNetcat.py -t server_IP -p port -l -c
+# python3 ReplacingNetcat.py -t server_IP -p port -l -u=file_to_upload
+# on client side/local machine
+# python3 ReplacingNetcat.py -t server_IP -p port or nc server_IP port
